@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply text-center m-4
+}
+
+.section {
+    @apply max-w-3xl m-auto
+}
+
+.green-btn {
+    @apply w-full m-auto bg-green-700 text-white px-1 py-2 flex-1 rounded text-center box-border
+}
+
+.red-btn {
+    @apply w-full m-auto bg-red-700 text-white px-1 py-2 flex-1 rounded text-center box-border
+}
+
+.card {
+    @apply  relative mx-auto my-3 shadow-md cursor-pointer max-w-xs p-0 h-28  text-center overflow-scroll rounded
+}
+
+.header-tab {
+    @apply box-border flex-1 
+}
+
+.active-tab {
+    @apply border-b-4 border-blue-900
+}
+
+.form-input {
+    @apply p-4 my-4 flex justify-between
+}
+
+.form-input input {
+    @apply text-wrap
+}
+
+
+
+

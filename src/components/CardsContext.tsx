@@ -10,6 +10,12 @@ function loadFlashCards() {
     return savedCards ? JSON.parse(savedCards) : [];
 } 
 
+function getNextReviewDate(card: CardType) {
+    const boxToDays = [1, 2, 5, 8, 14];
+    const cardDate = new Date(card.nextReview);
+    const nextDate = new Date(cardDate.getFullYear(), cardDate.getMonth(), cardDate.getDate() + boxToDays[(card.box == 5) ? 4 : card.box]);
+    return nextDate;
+}
 
 interface CardsProviderProps {
     children: React.ReactNode;
@@ -26,12 +32,11 @@ export function cardsReducer(cards: CardType[], action: ActionType) {
     switch (action.type) {
         case 'known':
             saveFlashCards(cards.map(card => {
-                const cardDate = new Date(payloadCard.nextReview);
                 if(card.id === payloadCard.id) {
-                    const nextDate = new Date(cardDate.getFullYear(), cardDate.getMonth(), cardDate.getDate() + 1);
+                    const nextDate = getNextReviewDate(payloadCard);
                     return {
                         ...payloadCard, 
-                        box: payloadCard.box + 1,
+                        box: (payloadCard.box == 5) ? 5 : payloadCard.box + 1,
                         nextReview: nextDate
                     };
                 }

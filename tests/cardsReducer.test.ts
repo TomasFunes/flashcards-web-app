@@ -10,7 +10,8 @@ describe("cardsReducer tests", () => {
         expect(result).toEqual(initialCards);
     })
 
-    it("Updates cards correctly on 'known' action", () => {
+
+    it("Updates cards correctly on 'known' action from box 1 to box 2", () => {
         const initialState = [
             {
                 id: 1,
@@ -28,7 +29,95 @@ describe("cardsReducer tests", () => {
         expect(result[0]).toEqual({
             ...knownCard, 
             box: knownCard.box + 1, 
-            nextReview: new Date(knownCard.nextReview.getFullYear(), knownCard.nextReview.getMonth(), knownCard.nextReview.getDate() + 1).toISOString() 
+            nextReview: new Date(knownCard.nextReview.getFullYear(), knownCard.nextReview.getMonth(), knownCard.nextReview.getDate() + 2).toISOString() 
+        });
+    })
+
+    it("Updates cards correctly on 'known' action from box 2 to box 3", () => {
+        const initialState = [
+            {
+                id: 1,
+                box: 2,
+                queue: "Apple",
+                answer: "Manzana",
+                nextReview: new Date()
+        
+            },
+        ]
+
+        const knownCard = initialState[0];
+
+        const result = cardsReducer(initialState, {type: "known", payload: knownCard})
+        expect(result[0]).toEqual({
+            ...knownCard, 
+            box: knownCard.box + 1, 
+            nextReview: new Date(knownCard.nextReview.getFullYear(), knownCard.nextReview.getMonth(), knownCard.nextReview.getDate() + 5).toISOString() 
+        });
+    })
+
+    it("Updates cards correctly on 'known' action from box 3 to box 4", () => {
+        const initialState = [
+            {
+                id: 1,
+                box: 3,
+                queue: "Apple",
+                answer: "Manzana",
+                nextReview: new Date()
+        
+            },
+        ]
+
+        const knownCard = initialState[0];
+
+        const result = cardsReducer(initialState, {type: "known", payload: knownCard})
+        expect(result[0]).toEqual({
+            ...knownCard, 
+            box: knownCard.box + 1, 
+            nextReview: new Date(knownCard.nextReview.getFullYear(), knownCard.nextReview.getMonth(), knownCard.nextReview.getDate() + 8).toISOString() 
+        });
+    })
+
+    it("Updates cards correctly on 'known' action from box 4 to box 5", () => {
+        const initialState = [
+            {
+                id: 1,
+                box: 4,
+                queue: "Apple",
+                answer: "Manzana",
+                nextReview: new Date()
+            },
+        ]
+    
+        const knownCard = initialState[0];
+    
+        const result = cardsReducer(initialState, {type: "known", payload: knownCard})
+        
+    
+        expect(result[0]).toEqual({
+            ...knownCard, 
+            box: knownCard.box + 1, 
+            nextReview: new Date(knownCard.nextReview.getFullYear(), knownCard.nextReview.getMonth(), knownCard.nextReview.getDate() + 14).toISOString() 
+        });
+    })
+
+    it("Stays in the same box if the card is known and the box is 5", () => {
+        const initialState = [
+            {
+                id: 1,
+                box: 5,
+                queue: "Apple",
+                answer: "Manzana",
+                nextReview: new Date()
+            },
+        ]
+
+        const knownCard = initialState[0];
+
+        const result = cardsReducer(initialState, {type: "known", payload: knownCard})
+        expect(result[0]).toEqual({
+            ...knownCard, 
+            box: knownCard.box, 
+            nextReview: new Date(knownCard.nextReview.getFullYear(), knownCard.nextReview.getMonth(), knownCard.nextReview.getDate() + 14).toISOString() 
         });
     })
 
@@ -78,6 +167,7 @@ describe("cardsReducer tests", () => {
         );
     })
 
+
     it("Updates cards correctly on 'create' action", () => {
         const initialState = [
             {
@@ -120,6 +210,7 @@ describe("cardsReducer tests", () => {
             ]
         )
     })
+
 
     it("Updates cards correctly on 'delete' action", () => {
         const initialState = [
